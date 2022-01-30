@@ -14,9 +14,9 @@ export function getInitialData(){
 
 export function saveQuestion(){
     return Promise.all([_saveQuestion]).then(
-        ([question]) =>{
+        ([question]) =>
             question
-        }
+        
     )
 }
 
