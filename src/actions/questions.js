@@ -1,52 +1,69 @@
 import { saveQuestion } from "../utils/api";
 import { saveQuestionAnswer } from "../utils/api";
+import { showLoading } from "react-redux-loading-bar";
+import { hideLoading } from "react-redux-loading-bar";
+import { addAnswer } from "./users";
+import { addUserQuestion } from "./users";
 
-export const GET_QUESTIONS = 'GET_QUESTIONS'
-export const RETURN_ANSWER = 'RETURN_ANSWER'
-export const RETURN_QUESTION = 'RETURN_QUESTION'
+export const GET_QUESTIONS = "GET_QUESTIONS"
+export const ADD_QUESTION = "ADD_QUESTION"
+export const ANSWER_QUESTION = "ANSWER_QUESTION"
 
 export function getQuestions(questions) {
-    return{
-        type: GET_QUESTIONS,
+    return {
+        type:GET_QUESTIONS,
         questions
     }
 }
 
-function returnAnswer(authedUserId, question_id, answer) {
+export function addQuestion(question){
     return {
-        type: RETURN_ANSWER,
-        authedUserId,
+        type: ADD_QUESTION,
+        question
+    }
+}
+
+export function answerQuestion(authedUser, question_id, answer) {
+    return {
+        type: ANSWER_QUESTION,
+        authedUser,
         question_id,
         answer
     }
 }
 
-function returnQuestion(question){
-    return{
-        type: RETURN_QUESTION,
-        question
-    }
-}
+export function handleQuestionAnswer(question_id, answer){
+    return(dispatch, getState) => {
+        const {authedUser} = getState()
 
-export function handleReturnedAnswer(question_id, answer){
-    return (dispatch, getState) => {
-        const {authedUser} = getState();
-        dispatch(returnAnswer(authedUser,question_id,answer))
+        dispatch(showLoading())
+
         return saveQuestionAnswer({
             authedUser,
             question_id,
             answer
-        })
+        }).then(() => dispatch(answerQuestion(authedUser, question_id, answer)))
+        .then(() => dispatch(addAnswer(authedUser, question_id, answer )))
+        .then(() =>dispatch(hideLoading()))
+
     }
 }
 
-export function handleReturnedQuestion(textOne, textTwo) {
+export function handleQuestionAdd(textOne, textTwo){
     return (dispatch, getState) => {
-        const {authedUser} = getState();
+        const {authedUser} = getState()
+        const author = authedUser
+        dispatch(showLoading())
+
         return saveQuestion({
             textOne,
             textTwo,
-            author: authedUser
-        }).then(question => dispatch(returnQuestion(question)))
+            author
+        }).then(function (question){
+            dispatch(addQuestion(question))
+            dispatch(addUserQuestion(authedUser,question.id))
+
+        })
+
     }
 }

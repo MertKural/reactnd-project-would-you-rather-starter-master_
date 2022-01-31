@@ -1,11 +1,18 @@
 import logo from '../logo.svg';
 import '../App.css';
 import React from 'react';
+import { Fragment } from 'react';
 import { Component } from 'react'
 import { connect } from 'react-redux';
 import { handleInitData } from '../actions/shared'
-import Heading from './Heading';
+import LeaderBoard from './LeaderBoard';
 import NavigationBar from './NavigationBar';
+import { LoadingBar } from 'react-redux-loading-bar';
+import {BrowserRouser as Router, Route} from 'react-router-dom'
+import {QuestionList} from './QuestionList'
+import {Questions} from './Questions'
+import {AddQuestion} from './AddQuestion'
+
 
 class App extends Component {
   componentDidMount() {
@@ -14,14 +21,9 @@ class App extends Component {
 
   render() {
     return (
-      <>
-        {this.props.authedUser !== null(
-          <div>
-            <Heading />
-            <NavigationBar />
-          </div>
-        )}
-      </>
+      <div>
+       öert
+      </div>
     )
   }
 }

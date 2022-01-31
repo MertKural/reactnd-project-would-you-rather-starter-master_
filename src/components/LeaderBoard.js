@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-class Heading extends Component{
+class LeaderBoard extends Component{
     render(){
         return(
             <>
@@ -10,4 +10,4 @@ class Heading extends Component{
     }
 }
 
-export default Heading;
+export default LeaderBoard;

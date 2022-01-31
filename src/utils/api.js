@@ -12,15 +12,18 @@ export function getInitialData(){
     )
 }
 
-export function saveQuestion(){
-    return Promise.all([_saveQuestion]).then(
-        ([question]) =>
-            question
-        
-    )
-}
+export function getQuestions (info) {
+    return _getQuestions(info)
+  }
+  
+  export function saveQuestion (info) {
+    return _saveQuestion(info)
+  }
 
-export function saveQuestionAnswer(answer){
-    return _saveQuestionAnswer(answer)
-    
-}
+  export function saveQuestionAnswer (info) {
+    return _saveQuestionAnswer(info)
+  }
+
+  export function getUsers (info) {
+    return _getUsers(info)
+  }

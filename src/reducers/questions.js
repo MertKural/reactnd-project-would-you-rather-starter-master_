@@ -1,6 +1,6 @@
 import { GET_QUESTIONS } from "../actions/questions";
-import { RETURN_ANSWER } from "../actions/questions";
-import { RETURN_QUESTION } from "../actions/questions";
+import { ANSWER_QUESTION } from "../actions/questions";
+import { ADD_QUESTION } from "../actions/questions";
 
 export default function questions(state = {}, action) {
     switch (action.type){
@@ -9,25 +9,23 @@ export default function questions(state = {}, action) {
                 ...state,
                 ...action.questions
             }
-        case RETURN_ANSWER:
+        case ADD_QUESTION:
+            return {
+                ...state,
+                [action.question.id]: action.question
+            }
+        case ANSWER_QUESTION:
             return {
                 ...state,
                 [action.question_id]: {
                     ...state[action.question_id],
                     [action.answer]: {
                         ...state[action.question_id][action.answer],
-                        votes: state[action.question_id][action.answer].votes.concat([
-                            action.authedUser
-                        ])
+                        votes: state[action.question_id][action.answer].votes.concat([action.authedUser])
                     }
                 }
             }
-        case RETURN_QUESTION:
-            return {
-                ...state,
-                [action.question.id]: action.question
-            }
         default:
-            state
+            return state
     }
 }
