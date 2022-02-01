@@ -1,20 +1,21 @@
-import { getQuestions } from "./questions";
-import { getUsers } from "./users";
-import { getInitialData } from "../utils/api";
-import { showLoading } from "react-redux-loading-bar";
-import { hideLoading } from "react-redux-loading-bar";
-import { setAuthedUser } from "./authedUsers";
+import { getInitialData } from '../utils/api'
+import { receiveUsers } from './users'
+import { receiveQuestions } from './questions'
+import { showLoading, hideLoading } from 'react-redux-loading-bar'
+import { setAuthedUser } from './authedUsers'
 
-const authentication_id = null 
+const AUTHED_ID = null
 
-export function handleInitData(){
-    return dispatch => {
+
+export function handleInitData () {
+    return (dispatch) => {
         dispatch(showLoading())
-        return getInitialData().then(({users, questions})=>{
-            dispatch(getUsers(users))
-            dispatch(getQuestions(questions))
-            dispatch(setAuthedUser(authentication_id))
-            dispatch(hideLoading)
+        return getInitialData()
+        .then(({ users, questions }) => {
+            dispatch(receiveUsers(users))
+            dispatch(receiveQuestions(questions))
+            dispatch(setAuthedUser(AUTHED_ID))
+            dispatch(hideLoading())
         })
     }
 }

@@ -1,16 +1,13 @@
-import { ADD_QUESTION } from "../actions/questions"
-import { ADD_ANSWER } from "../actions/users"
-import { ADD_USER_QUESTION } from "../actions/users"
-import { GET_USERS } from "../actions/users"
+import { ADD_QUESTION_ANSWER, ADD_USER_QUESTION, RECEIVE_USERS } from '../actions/users'
 
-export default function users(state = {}, action){
-    switch(action.type){
-        case GET_USERS:
+export default function users(state = {}, action) {
+    switch (action.type) {
+        case RECEIVE_USERS:
             return {
                 ...state,
                 ...action.users
             }
-        case ADD_ANSWER:
+        case ADD_QUESTION_ANSWER:
             return {
                 ...state,
                 [action.authedUser]: {
@@ -22,7 +19,7 @@ export default function users(state = {}, action){
                 }
             }
         case ADD_USER_QUESTION:
-            return{
+            return {
                 ...state,
                 [action.authedUser]: {
                     ...state[action.authedUser],

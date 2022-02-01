@@ -2,10 +2,9 @@ import React from 'react'
 import {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {addQuestion} from '../actions/questions'
+import {handleAddQuestion} from '../actions/questions'
 
-class AddQuestion extends React.Component{
-
+class AddQuestion extends Component {
     state = {
         questionOne: '',
         questionTwo: '',
@@ -14,20 +13,26 @@ class AddQuestion extends React.Component{
 
     handleQuestionOneChange = e => {
         const questionOne = e.target.value
-        this.setState(() => ({  questionOne }))
+
+        this.setState(() => ({
+            questionOne
+        }))
     }
 
     handleQuestionTwoChange = e => {
         const questionTwo = e.target.value
-        this.setState(() => ({  questionTwo }))
+
+        this.setState(() => ({
+            questionTwo
+        }))
     }
 
-    handleSendAnswer = (e) => {
+    submitAnswer = (e) => {
         e.preventDefault()
         const { dispatch } = this.props
         const { questionOne, questionTwo } = this.state
 
-        dispatch(addQuestion(
+        dispatch(handleAddQuestion(
             questionOne,
             questionTwo
         ))
@@ -37,9 +42,11 @@ class AddQuestion extends React.Component{
             questionTwo: '',
             toDashboard: !!(questionOne && questionTwo),
         }))
+
     }
 
-    render(){
+
+    render() {
         const { questionOne, questionTwo, toDashboard } = this.state;
 
         if (toDashboard === true) {
@@ -51,7 +58,7 @@ class AddQuestion extends React.Component{
                 <h1>New Question:</h1>
                 <div>Would You Rather...?</div>
           		<br></br>
-                <form onSubmit={this.handleSendAnswer}>
+                <form onSubmit={this.submitAnswer}>
                     <div>Option 1: <input value={questionOne} onChange={this.handleQuestionOneChange}/></div>
       				<br></br>
                     <div>Option 2: <input value={questionTwo} onChange={this.handleQuestionTwoChange}/></div>
@@ -61,7 +68,6 @@ class AddQuestion extends React.Component{
             </div>
 
         );
-    
     }
 }
 

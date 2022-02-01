@@ -2,7 +2,7 @@ import React from 'react'
 import {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {handleQuestionAnswer} from '../actions/questions'
+import {handleAnswerQuestion} from '../actions/questions'
 
 class Questions extends React.Component{
 
@@ -10,26 +10,24 @@ class Questions extends React.Component{
         value: ''
     }
 
-
-    onChange = (event) =>{
-        this.setState({value: event.target.value})
+    handleChange = (event) => {
+        this.setState({ value: event.target.value });
     }
 
-    sendAnswer = (e) => {
+    submitAnswer = (e) => {
         e.preventDefault()
-        const {question, dispatch} = this.props
-        const {value} = this.state
+        const { question, dispatch } = this.props
+        const { value } = this.state
 
-        dispatch(handleQuestionAnswer(
+        dispatch(handleAnswerQuestion(
             question.id,
             value
         ))
+
     }
 
 
-
-    render(){
-
+    render() {
 
         const { question, answer, questionAuthor } = this.props
         const { value } = this.state
@@ -74,7 +72,7 @@ class Questions extends React.Component{
                         </div>
 
                     </div>
-                    : <form onSubmit={this.sendAnswer}>
+                    : <form onSubmit={this.submitAnswer}>
                         <div> <span>Would You Rather...</span> </div>
                         <div className="radio" onChange={this.handleChange}>
                             <div><input type="radio" value="optionOne" checked={value === 'optionOne'} /> ...{optionOne.text}?</div>
@@ -88,7 +86,6 @@ class Questions extends React.Component{
     }
 }
 
-
 const mapStateToProps = ({ authedUser, questions, users }, props) => {
     const { question_id } = props.match.params
 
@@ -101,5 +98,4 @@ const mapStateToProps = ({ authedUser, questions, users }, props) => {
         answer: question ? answers[question.id] : null
     }
 }
-
 export default withRouter(connect(mapStateToProps)(Questions));

@@ -8,7 +8,7 @@ const NavigationBar = props => {
         <nav className='nav'>
             <ul>
                 <div>{props.authedUser?
-                    <div>Hello, {props.authedUser}
+                    <div>Hello, {props.authedUser}   <br></br>
                     <a href="/" onClick={props.logout}>LogOut</a>
                     </div>
                     :null}

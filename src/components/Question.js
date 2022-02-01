@@ -32,6 +32,7 @@ class Question extends React.Component{
             </Link>
         )
     }
+
 }
 
 const mapStateToProps = ({ questions, users }, { id }) => {
@@ -44,6 +45,7 @@ const mapStateToProps = ({ questions, users }, { id }) => {
         question: question ?
             question : null
     }
+
 }
 
 export default withRouter(connect(mapStateToProps)(Question));

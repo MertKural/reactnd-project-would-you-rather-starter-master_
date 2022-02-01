@@ -44,7 +44,7 @@ class App extends Component {
             {console.log("Iamhere3")}
             <Route path='/' exact component = {QuestionList} />
             <Route path='/questions/:question_id' component = {Questions} />
-            <Route path='/addQuestion' component = {AddQuestion} />
+            <Route path='/add' component = {AddQuestion} />
             <Route path='/leaderboard' component = {LeaderBoard} />
           </div>
           
