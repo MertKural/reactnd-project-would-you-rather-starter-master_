@@ -9,9 +9,9 @@ import LeaderBoard from './LeaderBoard';
 import NavigationBar from './NavigationBar';
 import { LoadingBar } from 'react-redux-loading-bar';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import {QuestionList} from './QuestionList'
-import {Questions} from './Questions'
-import {AddQuestion} from './AddQuestion'
+import QuestionList from './QuestionList'
+import Questions from './Questions'
+import AddQuestion from './AddQuestion'
 import LoginPage from './LoginPage';
 
 
