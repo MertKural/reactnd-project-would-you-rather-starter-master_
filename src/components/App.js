@@ -8,10 +8,11 @@ import { handleInitData } from '../actions/shared'
 import LeaderBoard from './LeaderBoard';
 import NavigationBar from './NavigationBar';
 import { LoadingBar } from 'react-redux-loading-bar';
-import {BrowserRouser as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {QuestionList} from './QuestionList'
 import {Questions} from './Questions'
 import {AddQuestion} from './AddQuestion'
+import LoginPage from './LoginPage';
 
 
 class App extends Component {
@@ -21,32 +22,32 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-       öert
-      </div>
+      <Router>
+        <Fragment>
+          <LoadingBar />
+          <div className='container'>
+            <NavigationBar logout = {this.handleLogOut} />
+            {this.props.login === true? 
+            <LoginPage/>
+          :
+          <div>
+            <Route path='/' exact component = {QuestionList} />
+            <Route path='/questions/:question_id' component = {Questions} />
+            <Route path='/addQuestion' component = {AddQuestion} />
+            <Route path='/leaderboard' component = {LeaderBoard} />
+          </div>
+          
+          }
+          </div>
+        </Fragment>
+      </Router>
     )
   }
 }
 
-function mapStateToProps({ authedUser, users, questions }) {
-  if (users && authedUser) {
-    const unanswered_question_ids = [];
-    const answered_question_ids = Object.keys(users[authedUser].answers)
-    const questions_ids = Object.keys(questions).sort(
-      (a, b) => questions[b].timestamp - questions[a].timestamp
-    )
-    questions_ids.map(
-      id => answered_question_ids.includes(id) === false && unanswered_question_ids.push(id)
-    )
-    answered_question_ids.sort((a, b) => questions[b] - questions[a])
-    return {
-      authedUser,
-      answered_question_ids,
-      unanswered_question_ids
-    }
-  }
+function mapStateToProps({ authedUser}) {
   return {
-    authedUser
+    login: authedUser === null
   }
 }
 

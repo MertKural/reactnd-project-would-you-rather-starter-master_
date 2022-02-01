@@ -1,12 +1,68 @@
 import React from 'react'
 import {Component} from 'react'
+import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
+import {setAuthedUser} from '../actions/authedUsers'
 
 class LoginPage extends React.Component{
+
+    state = {
+        user: 'select',
+        returnMain: false
+    }
+
+    handleChange = (e) =>{
+        this.setState({user : e.target.value})
+    }
+
+    handleSignIn = () =>{
+        const {user} = this.state 
+        const {dispatch} = this.props
+
+        dispatch(setAuthedUser(
+            user
+        ))
+
+        this.setState(() => ({
+            user: 'select',
+            toDashboard: !!user
+        }))
+    }
+
     render(){
-        return(
-            <></>
+        const { user, toDashboard } = this.state
+
+        if (toDashboard === true) {
+            return <Redirect exact to='/' />
+        }
+
+        return (
+            <div className='center'>
+                <h3 className='center'>Login:</h3>
+                <select value={user} onChange={this.handleChange} className='dashboard-list'>
+                    <option value="select" disabled>Select User</option>
+                    {this.props.userIds.map((id) => (
+                        <option value={id} key={id}>
+                            {id}
+                        </option>
+                    ))}
+                </select>
+				
+                <div>
+					<br></br>
+                    <button onClick={this.onSignIn} disabled={user === 'select'}> Sign In </button>
+                </div>
+            </div>
         )
+
     }
 }
 
-export default LoginPage 
+const mapStateToProps = ({ users }) => {
+    return {
+        userIds: Object.keys(users)
+            .sort((a, b) => users[b].id - users[a].id)
+    }
+}
+
+export default connect(mapStateToProps)(LoginPage)
