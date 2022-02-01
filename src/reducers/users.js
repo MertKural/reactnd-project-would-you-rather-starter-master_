@@ -21,7 +21,7 @@ export default function users(state = {}, action){
                     }
                 }
             }
-        case ADD_QUESTION:
+        case ADD_USER_QUESTION:
             return{
                 ...state,
                 [action.authedUser]: {

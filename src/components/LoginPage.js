@@ -11,13 +11,13 @@ class LoginPage extends React.Component{
         returnMain: false
     }
 
-    handleChange = (e) =>{
-        this.setState({user : e.target.value})
+    handleChange = (event) =>{
+        this.setState({user : event.target.value})
     }
 
     handleSignIn = () =>{
-        const {user} = this.state 
-        const {dispatch} = this.props
+        const { user } = this.state
+        const { dispatch } = this.props
 
         dispatch(setAuthedUser(
             user
@@ -25,8 +25,9 @@ class LoginPage extends React.Component{
 
         this.setState(() => ({
             user: 'select',
-            toDashboard: !!user
+            toDashboard: !!user,
         }))
+
     }
 
     render(){
@@ -38,21 +39,21 @@ class LoginPage extends React.Component{
 
         return (
             <div className='center'>
-                <h3 className='center'>Login:</h3>
-                <select value={user} onChange={this.handleChange} className='dashboard-list'>
-                    <option value="select" disabled>Select User</option>
-                    {this.props.userIds.map((id) => (
-                        <option value={id} key={id}>
-                            {id}
-                        </option>
-                    ))}
-                </select>
-				
-                <div>
-					<br></br>
-                    <button onClick={this.onSignIn} disabled={user === 'select'}> Sign In </button>
-                </div>
+            <h3 className='center'>Login As:</h3>
+            <select value={user} onChange={this.handleChange} className='dashboard-list'>
+                <option value="select" disabled>Select User</option>
+                {this.props.userIds.map((id) => (
+                    <option value={id} key={id}>
+                        {id}
+                    </option>
+                ))}
+            </select>
+            
+            <div>
+                <br></br>
+                <button onClick={this.handleSignIn} disabled={user === 'select'}> Sign In </button>
             </div>
+        </div>
         )
 
     }

@@ -11,46 +11,49 @@ class QuestionList extends React.Component {
 
     switchHandler = () => {
         this.setState((currentState) => ({
-            toggle: !currentState.toggle
+            switch: !currentState.switch
         }))
 
     }
 
     render() {
+        const { unansweredQuestions, answeredQuestions } = this.props
+
         if (this.props.authedID === null) {
             return <Redirect to='/' />
         }
         return (
             <div>
-                <ul className='dashboard-list'>
-                    <button onClick={this.switchHandler}>Switch {this.state.switch ? 'Answered' : 'Unanswered'}</button>
-                    {this.state.switch ?
-                        <div>
-                            <h1>Unanswered Quesions</h1>
-                            {this.props.unansweredQuestions.length === 0 ? 'You answered all of the questions' :
-                                <div>
-                                    {
-                                        this.props.unansweredQuestions.map((q) => (
-                                            <li key={q.id}>
-                                                <Question id={q.id} />
-                                            </li>
-                                        ))
-                                    }
-                                </div>
-                            }
-                        </div>
-                        :
-                        <div>
-                            <h1>Answered Questions:</h1>
-                            {this.props.answeredQuestions.map((q) => (
-                                <li key={q.id}>
-                                    <Question id={q.id} />
-                                </li>
-                            ))}
-                        </div>
-                    }
-                </ul>
-            </div>
+            <ul className='dashboard-list'>
+                <button onClick={this.switchHandler}>Switch {this.state.switch ? 'Answered' : 'Unanswered'}</button>
+                {this.state.toggle ?
+                    <div>
+                        <h1>Unanswered Questions:</h1>
+                        {unansweredQuestions.length === 0 ? `You've Answered All Questions. Good Job!` :
+
+                            <div> {
+                                unansweredQuestions.map((question) => (
+                                    <li key={question.id}>
+                                        <Question id={question.id} />
+                                        <br></br>
+                                    </li>
+                                ))
+                            } </div>
+
+                        }
+
+                    </div>
+                    : <div>
+                        <h1>Answered Questions:</h1>
+                        {answeredQuestions.map((question) => (
+                            <li key={question.id}>
+                                <Question id={question.id} />
+                            </li>
+                        ))}
+                    </div>
+                }
+            </ul>
+        </div>
         )
     }
 }

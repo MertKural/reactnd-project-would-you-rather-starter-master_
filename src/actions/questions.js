@@ -63,7 +63,7 @@ export function handleQuestionAdd(textOne, textTwo){
             dispatch(addQuestion(question))
             dispatch(addUserQuestion(authedUser,question.id))
 
-        })
+        }).then(() => dispatch(hideLoading()))
 
     }
 }

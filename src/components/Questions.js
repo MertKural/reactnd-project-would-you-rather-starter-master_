@@ -30,59 +30,64 @@ class Questions extends React.Component{
 
     render(){
 
-        const { question, answer, questionAuthor} = this.props
-        const {value} = this.state 
 
-        if (question === null){
-            return <p>There is no such question</p>
+        const { question, answer, questionAuthor } = this.props
+        const { value } = this.state
+
+        if (question === null) {
+            return <p>This Question Doesn't Exist</p>
         }
 
-        const results = {
-            totalVotes: question.optionOne.votes.length + question.optioonTwo.votes.length ,
+        const resultMetrics = {
+            total: question.optionOne.votes.length + question.optionTwo.votes.length,
             optionOneVotes: question.optionOne.votes.length,
-            optionTwoVotes: question.optionTwo.votes.length
+            optionTwoVotes: question.optionTwo.votes.length,
         }
 
-        const  { optionOne, optionTwo} = question
-        const {totalVotes, optionOneVotes, optionTwoVotes} = results
+        const { optionOne, optionTwo } = question
 
+        const { total, optionOneVotes, optionTwoVotes } = resultMetrics
 
-        return(
+        return (
             <div>
                 <img
                     src={questionAuthor.avatarURL}
+                    alt={`Avatar of ${questionAuthor.name}`}
                     className='avatar'
                 />
 
-                {(!!answer)?
+                {(!!answer) ?
                     <div>
                         <div>
                             <div>
-                                <span>Option One: {optionOne.text}</span>
-                                <div>{((optionOneVotes / totalVotes) * 100).toFixed(2)}%</div>
-                                <div>{optionOneVotes} out of {totalVotes} votes</div>
+                                <span>Option One: {optionOne.text}?</span>
+                                <div>{((optionOneVotes / total) * 100).toFixed(2)}%</div>
+                                <div>{optionOneVotes} out of {total} votes</div>
                             </div>
+                            <br></br>
                             <div>
-                                <span>Option Two: {optionTwo.text}</span>
-                                <div>{((optionTwoVotes / totalVotes) * 100).toFixed(2)}%</div>
-                                <div>{optionTwoVotes} out of {totalVotes} votes</div>
-                            </div>                            
+                                <span>Option Two: {optionTwo.text}?</span>
+                                <div>{((optionTwoVotes / total) * 100).toFixed(2)}%</div>
+                                <div><span>{optionTwoVotes} out of {total} votes</span></div>
+                            </div>
+
                         </div>
-                    </div>    
-             :
-            <form onSubmit={this.sendAnswer}>
-                <div><span>Would You Rather...</span></div>
-                <div className='radio' onChange={this.onChange}>
-                    <div><input type='radio' value='optionOne' checked = {value === 'optionOne'}/></div>
-                    <div><input type='radio' value='optionTwo' checked = {value === 'optionTwo'}/></div>
-                </div>
-                <button disabled={value === ''}>Submit</button>
-            </form>
-}
+
+                    </div>
+                    : <form onSubmit={this.sendAnswer}>
+                        <div> <span>Would You Rather...</span> </div>
+                        <div className="radio" onChange={this.handleChange}>
+                            <div><input type="radio" value="optionOne" checked={value === 'optionOne'} /> ...{optionOne.text}?</div>
+                            <div><input type="radio" value="optionTwo" checked={value === 'optionTwo'} /> ...{optionTwo.text}?</div>
+                        </div>
+                        <button disabled={value === ''}>Submit</button>
+                    </form>
+                }
             </div>
-        )
+        );
     }
 }
+
 
 const mapStateToProps = ({ authedUser, questions, users }, props) => {
     const { question_id } = props.match.params

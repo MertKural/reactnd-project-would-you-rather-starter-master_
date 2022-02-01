@@ -17,10 +17,10 @@ const NavigationBar = props => {
                     <NavLink to='/' exact activeClassName='active'>HOME</NavLink>
                 </li>
                 <li>
-                    <NavLink to='add' exact activeClassName='active'>NEW QUESTION</NavLink>
+                    <NavLink to='/add' exact activeClassName='active'>NEW QUESTION</NavLink>
                 </li>
                 <li>
-                    <NavLink to='leaderboard' exact activeClassName='active'>LEADERBOARD</NavLink>
+                    <NavLink to='/leaderboard' exact activeClassName='active'>LEADERBOARD</NavLink>
                 </li>
             </ul>
         </nav>

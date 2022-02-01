@@ -2,7 +2,7 @@ import React from 'react'
 import {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {handleQuestionAdd} from '../actions/questions'
+import {addQuestion} from '../actions/questions'
 
 class AddQuestion extends React.Component{
 
@@ -24,33 +24,44 @@ class AddQuestion extends React.Component{
 
     handleSendAnswer = (e) => {
         e.preventDefault()
-        const {dispatch} = this.props
-        const {questionOne, questionTwo} = this.state
-        dispatch(handleQuestionAdd(questionOne, questionTwo))
+        const { dispatch } = this.props
+        const { questionOne, questionTwo } = this.state
+
+        dispatch(addQuestion(
+            questionOne,
+            questionTwo
+        ))
+
         this.setState(() => ({
-            questionOne:'',
+            questionOne: '',
             questionTwo: '',
-            toDashboard: !!(questionOne && questionTwo)
+            toDashboard: !!(questionOne && questionTwo),
         }))
     }
 
     render(){
+        const { questionOne, questionTwo, toDashboard } = this.state;
 
-        if(this.state.toDashboard === true){
-            return <Redirect exact to='/'/>
+        if (toDashboard === true) {
+            return <Redirect exact to='/' />
         }
 
-        return(
+        return (
             <div className='center'>
-                <h1>New Question</h1>
-                <div>Would You Rather ???</div>
+                <h1>New Question:</h1>
+                <div>Would You Rather...?</div>
+          		<br></br>
                 <form onSubmit={this.handleSendAnswer}>
-                    <div>Option1: <input value={this.state.questionOne} onChange={this.handleQuestionOneChange} /></div>
-                    <div>Option2: <input value={this.state.questionTwo} onChange={this.handleQuestionTwoChange} /></div>
-                    <button disabled = {this.state.questionOne === '' || this.state.questionTwo === ''}>Submit</button>
+                    <div>Option 1: <input value={questionOne} onChange={this.handleQuestionOneChange}/></div>
+      				<br></br>
+                    <div>Option 2: <input value={questionTwo} onChange={this.handleQuestionTwoChange}/></div>
+      				<br></br>
+                    <button disabled={questionOne === '' || questionTwo === ''}> Submit </button>
                 </form>
             </div>
-        )
+
+        );
+    
     }
 }
 

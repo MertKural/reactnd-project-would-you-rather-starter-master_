@@ -6,24 +6,29 @@ import {withRouter} from 'react-router-dom'
 
 class Question extends React.Component{
     render(){
-        const {question, user} = this.props
-        const {author, id} = question 
+        const { question, user } = this.props
 
-        if(question === null){
-            return <p>Question Could't Found</p>
+        if (question === null) {
+            return <p>This Question Doesn't Exist</p>
         }
-        return(
-            <Link to={`/questions/${id}`}>
+
+        const { author, id } = question
+
+        return (
+            <Link to={`/questions/${id}`} >
+            <div>
                 <img
                     src={user.avatarURL}
+                    alt={`Avatar of ${author}`}
                     className='avatar'
                 />
                 <div>
-                    <span>{user.name} wondering:</span>
+                    <span>{user.name} asks:</span>
                 </div>
                 <div>
                     <span>Would You Rather...?</span>
                 </div>
+            </div>
             </Link>
         )
     }
