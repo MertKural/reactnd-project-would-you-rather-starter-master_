@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 
@@ -6,9 +6,10 @@ import {connect} from 'react-redux'
 const NavigationBar = props => {
     return (
         <nav className='nav'>
-            <ul>
+            <ul className='tabs'>
                 <div>{props.authedUser?
-                    <div>Hello, {props.authedUser}   <br></br>
+                    <div className='info'>Hello, {props.authedUser}
+                    <br></br><br></br>   
                     <a href="/" onClick={props.logout}>LogOut</a>
                     </div>
                     :null}

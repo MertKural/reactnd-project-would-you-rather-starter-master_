@@ -1,6 +1,45 @@
 # Would You Rather Project
 
-This is the starter code for the final assessment project for Udacity's React & Redux course.
+This is the final version for the final assessment project for Udacity's React & Redux course.
+
+The purpose of the project is to create an application that allows user to ask "Would You Rather" question as well as answer the ones that is already asked. In application, the main possible actions are
+1)To choose the user for login
+2)Login
+3)Logout
+4)Answer the question that is displayed on the main page
+5)Create a new question
+6)Display the leader board
+7)Disyplay the questions voting percentages after responding to it
+
+To run the app correctly user must run npm install and after that s/he can react the app via local:/3000 by running npm start command
+
+Project structre is based on 5 pillar
+
+1)actions
+    1.1)authedUsers
+    1.2)questions
+    1.3)shared
+    1.4)users
+2)reducers
+    1.1)authedUsers
+    1.2)index
+    1.3)questions
+    1.4)users
+3)middleware
+    1.1)index
+    1.2)middleware
+4)components
+    1.1)App
+    1.2)AddQuestion
+    1.3)LeaderBoard
+    1.4)LoginPage
+    1.5)NavigationBar
+    1.6)Question
+    1.7)QuestionList
+    1.8)Quesitons
+5)util
+    5.1)_Data: This fake database is given at the very beginning of the course as well as the simple methods with it. (The detailed info about the _DATA and provided methods are in the below)
+    5.2)Api: To react the _Data methos Api layer is written
 
 The `_DATA.js` file represents a fake database and methods that let you access the data. The only thing you need to edit in the ` _DATA.js` file is the value of `avatarURL`. Each user should have an avatar, so you’ll need to add the path to each user’s avatar.
 

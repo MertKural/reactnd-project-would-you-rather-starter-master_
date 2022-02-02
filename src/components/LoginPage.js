@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {setAuthedUser} from '../actions/authedUsers'
 
-class LoginPage extends React.Component{
+class LoginPage extends Component{
 
     state = {
         user: 'select',

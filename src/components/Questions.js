@@ -1,5 +1,4 @@
 import React from 'react'
-import {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {handleAnswerQuestion} from '../actions/questions'
@@ -73,13 +72,13 @@ class Questions extends React.Component{
 
                     </div>
                     : <form onSubmit={this.submitAnswer}>
-                        <div> <span>Would You Rather...</span> </div>
-                        <div className="radio" onChange={this.handleChange}>
-                            <div><input type="radio" value="optionOne" checked={value === 'optionOne'} /> ...{optionOne.text}?</div>
-                            <div><input type="radio" value="optionTwo" checked={value === 'optionTwo'} /> ...{optionTwo.text}?</div>
-                        </div>
-                        <button disabled={value === ''}>Submit</button>
-                    </form>
+                    <div> <span>Would You Rather...</span> </div>
+                    <div className="radio">
+                        <div><input type="radio" value="optionOne" checked={value === 'optionOne'}  onChange={this.handleChange}/> ...{optionOne.text}?</div>
+                        <div><input type="radio" value="optionTwo" checked={value === 'optionTwo'}  onChange={this.handleChange}/> ...{optionTwo.text}?</div>
+                    </div>
+                    <button disabled={value === ''}>Submit</button>
+                </form>
                 }
             </div>
         );

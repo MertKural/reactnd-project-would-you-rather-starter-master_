@@ -56,12 +56,12 @@ class AddQuestion extends Component {
         return (
             <div className='center'>
                 <h1>New Question:</h1>
-                <div>Would You Rather...?</div>
+                <h3>Would You Rather...?</h3>
           		<br></br>
                 <form onSubmit={this.submitAnswer}>
-                    <div>Option 1: <input value={questionOne} onChange={this.handleQuestionOneChange}/></div>
+                    <div>Option 1: <input value={questionOne} onChange={this.handleQuestionOneChange} placeholder='Enter option 1'/></div>
       				<br></br>
-                    <div>Option 2: <input value={questionTwo} onChange={this.handleQuestionTwoChange}/></div>
+                    <div>Option 2: <input value={questionTwo} onChange={this.handleQuestionTwoChange} placeholder='Enter option 2'/></div>
       				<br></br>
                     <button disabled={questionOne === '' || questionTwo === ''}> Submit </button>
                 </form>

@@ -1,4 +1,3 @@
-import logo from '../logo.svg';
 import '../index.css';
 import React from 'react';
 import { Fragment } from 'react';
@@ -32,7 +31,6 @@ class App extends Component {
      
       <Router>
         <Fragment>
-        {console.log("Iamhere")}
           <LoadingBar />
           <div className='container'>
             <NavigationBar logout = {this.handleLogOut} />
@@ -41,7 +39,6 @@ class App extends Component {
             
           :
           <div>
-            {console.log("Iamhere3")}
             <Route path='/' exact component = {QuestionList} />
             <Route path='/questions/:question_id' component = {Questions} />
             <Route path='/add' component = {AddQuestion} />
